@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <title>Online Lightswitch</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script>
+      $(function() {
+        $("#login").click(function() {
+          $.ajax({
+            type: 'GET',
+            url : '/login?callback=?',
+            dataType: 'jsonp',
+            xhrFields: {
+               withCredentials: true
+            },
+            //callback:'/authn/twitter/callback',
+            crossDomain: true
+            });
+        });
+ 
+        $("#tweet").click(function() {
+          tweet = $('#txt_tweet').val();
+          $.ajax('/twitter/tweet?text='+tweet);
+        });
+
+        $("#msg").click(function() {
+          msg = $('#txt_msg').val();
+          $.ajax('/twitter/direct/15Chichi?text='+msg);
+        });
+
+      });
+    </script>
+  </head>
+
+  <body>
+
+    <!-- <button id="login">Login (MA NON FUNZIONA CORRETTAMENTE)</button> -->
+
+    <br><br><br>
+    <a href="/authn/twitter"><img src="sign-in-with-twitter-l.png" width="151" height="24"></a>
+
+    <br><br><br>
+    <a href="/authz/twitter">Login con permessi da parte dell'applicazione</a>
+
+    <br><br><br>
+    <input type="text" id="txt_tweet" />
+    <br>
+    <button id="tweet">Post Tweet</button>
+
+    <br><br><br>
+    <input type="text" id="txt_msg" />
+    <br>
+    <button id="msg">Manda un messaggio privato a Chichi</button>
+
+  </body>
+</html>
